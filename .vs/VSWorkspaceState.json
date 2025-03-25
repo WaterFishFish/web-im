@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\public",
+    "\\public\\data",
+    "\\src",
+    "\\src\\api",
+    "\\src\\assets",
+    "\\src\\router",
+    "\\src\\store",
+    "\\src\\utils",
+    "\\src\\views"
+  ],
+  "SelectedNode": "\\public\\data\\groupuserlist.json",
+  "PreviewInSolutionExplorer": false
+}
