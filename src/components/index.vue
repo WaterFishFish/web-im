@@ -34,11 +34,8 @@
         </template>
         <template #sidebar-message="Contact">
           <span class="lemon-badge lemon-contact__avatar" @click="closeGroup">
-            <span
-              class="lemon-avatar"
-              v-bind:class="{ 'lemon-avatar--circle': setting.avatarCricle }"
-            >
-              <img size="50px" :src="Contact.avatar"
+            <span class="lemon-avatar">
+              <img size="50px" :src="Contact.avatar" alt="用户头像"
             /></span>
           </span>
           <div class="lemon-contact__inner" @click="closeGroup">
@@ -66,22 +63,25 @@
         <template #editor-footer> 使用 Enter 键发送消息</template>
       </lemon-imui>
     </div>
-    <Socket ref="socket"></Socket>
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
 import * as utils from "@/utils/index";
-import Socket from "./socket";
 import { getUser, setAuth } from "@/utils/auth";
+import Lockr from "lockr";
+import lockr from "lockr";
+import Vue from "vue";
+import { v4 as uuidv4 } from "uuid";
+import { Message } from "element-ui";
+import router from "@/router";
+import EmojiData from "lemon-imui/examples/database/emoji";
 
 const account = getUser();
 export default {
   name: "app",
-  components: {
-    Socket,
-  },
+  components: {},
   props: {
     width: {
       type: String,
@@ -95,6 +95,7 @@ export default {
   data() {
     var _this = this;
     return {
+      websocket: null,
       curWidth: this.width,
       curHeight: this.height,
       unread: 0,
@@ -137,7 +138,6 @@ export default {
   computed: {
     // 监听全局socket消息状态
     ...mapState({
-      socketAction: (state) => state.socketAction,
       contactId: (state) => state.toContactId,
       contactSync: (state) => state.contactSync,
       setting: (state) => state.setting,
@@ -150,36 +150,22 @@ export default {
       };
     },
   },
-  watch: {
-    // 监听接收socket消息
-    socketAction(event) {
-      console.log("socketAction");
-      console.log(event);
-
-      const { IMUI } = this.$refs;
-      const data = {
-        id: event.data.MsgId,
-        status: "succeed",
-        type: "text",
-        sendTime: event.data.sendTime,
-        content: event.data.Content,
-        toContactId: event.data.ConversationId,
-        fromUser: event.data.fromUser,
-      };
-      console.log(data);
-      // IMUI.appendMessage(data);
-    },
-  },
   created() {},
+  beforeDestroy() {
+    this.websocket.close();
+  },
   mounted() {
     this.user = getUser();
     // 初始化联系人
     this.getSimpleChat();
+    this.initWebSocket();
+    this.$refs.IMUI.initEmoji(EmojiData);
   },
   methods: {
     logout() {
       setAuth(undefined);
-      window.location.reload();
+      Message.success("退出登陆");
+      router.push({ path: "/login" });
     },
     // 初始化聊天
     getSimpleChat(update) {
@@ -236,6 +222,114 @@ export default {
       ];
       IMUI.initMenus(menus);
     },
+    getWsUrl() {
+      return process.env.VUE_APP_BASE_WS;
+    },
+    initWebSocket() {
+      //初始化weosocket
+      //ws地址
+      const WS_URI = this.getWsUrl();
+      let token = Lockr.get("token");
+      this.websocket = new WebSocket(
+        `${WS_URI}?token=${encodeURIComponent(token)}`,
+        [token]
+      );
+
+      // 打开websocket
+      this.websocket.onopen = (event) => {
+        console.log("websocket 连接已建立");
+      };
+
+      //监听消息
+      this.websocket.onmessage = (e) => {
+        const msg = JSON.parse(e.data);
+        console.log(msg);
+        const { IMUI } = this.$refs;
+        const data = {
+          id: uuidv4(),
+          status: "succeed",
+          type: "text",
+          sendTime: msg.data.SendTime,
+          content: msg.data.Content,
+          toContactId:
+            msg.data.ChatType === 1
+              ? "0x00186a7000000001"
+              : this.contactsToUid.get(msg.formId).id,
+          fromUser: this.contactsToUid.get(msg.formId)
+            ? {
+                id: this.contactsToUid.get(msg.formId).id,
+                displayName: this.contactsToUid.get(msg.formId).displayName,
+                avatar: this.contactsToUid.get(msg.formId).avatar,
+              }
+            : {
+                id: uuidv4(),
+                displayName: "未知联系人",
+                avatar: "",
+              },
+        };
+        console.log(data);
+
+        const conversationId =
+          msg.data.ChatType === 1
+            ? "0x00186a7000000001"
+            : this.user.id > msg.formId
+            ? `${this.user.id}_${msg.formId}`
+            : `${msg.formId}_${this.user.id}`;
+
+        let messageList = lockr.get(conversationId) || [];
+        messageList.push(data);
+        lockr.set(conversationId, messageList);
+
+        IMUI.appendMessage(data, true);
+      };
+
+      this.websocket.onerror = (error) => {
+        console.error("webSocket 发生错误:", error);
+      };
+
+      this.websocket.onclose = (event) => {
+        console.log("websocket 连接已关闭");
+      };
+      Vue.prototype.$websocket = this.websocket;
+    },
+    handleSend(message, next, file) {
+      console.log(message);
+      const data = {
+        id: uuidv4(),
+        method: "conversation.chat",
+        // method: "push",
+        data: {
+          frameType: 0,
+          chatType: this.is_group ? 1 : 2,
+          recvId: message.toContactId,
+          sendId: this.is_group ? "0" : this.user.id,
+          sendTime: new Date().getTime(),
+          msg: {
+            msgId: uuidv4(),
+            content: message.content,
+          },
+        },
+      };
+
+      let jsonData = JSON.stringify(data);
+      console.log(jsonData);
+      if (this.websocket && this.websocket.readyState === WebSocket.OPEN) {
+        this.websocket.send(jsonData);
+      }
+
+      const conversationId =
+        this.is_group === 1
+          ? "0x00186a7000000001"
+          : this.user.id > message.toContactId
+          ? `${this.user.id}_${message.toContactId}`
+          : `${message.toContactId}_${this.user.id}`;
+
+      let messageList = lockr.get(conversationId) || [];
+      message.status = "succeed";
+      messageList.push(message);
+      lockr.set(conversationId, messageList);
+      next();
+    },
     // 切换聊天窗口时要检测那些消息未读
     handleChangeContact(contact, instance) {
       instance.updateContact({
@@ -268,37 +362,18 @@ export default {
       }
       instance.closeDrawer();
     },
-    // 发送聊天消息
-    handleSend(message, next, file) {
-      console.log(message);
-      const data = {
-        id: message.id,
-        method: "conversation.chat",
-        data: {
-          chatType: this.is_group,
-          recvId: this.contactsToUid.get(message.toContactId).id,
-          msg: {
-            content: message.content,
-          },
-        },
-      };
-      console.log(data);
-
-      this.$refs.socket.websocketSend(data);
-
-      next();
-    },
     // 拉取聊天记录
     handlePullMessages(contact, next, instance) {
       let params = this.params;
       params.toContactId = contact.id;
+      params.currentId = this.user.id;
       params.is_group = contact.is_group;
       this.$api.imApi
         .getMessageListAPI(params)
         .then((res) => {
+          let messages = res;
           this.params.page++;
           let isEnd = false;
-          let messages = res.data;
           if (messages.length < this.params.limit) {
             isEnd = true;
           }

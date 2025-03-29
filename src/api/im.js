@@ -1,4 +1,5 @@
 import request from "@/utils/request";
+import lockr from "lockr";
 
 const imApi = {};
 
@@ -17,13 +18,19 @@ imApi.getContactsAPI = (data) => {
 };
 
 imApi.getMessageListAPI = (data) => {
-  return request.get(
-    "http://" + window.location.host + "/data/msg/" + data.toContactId + ".json"
-  );
-};
-
-imApi.getFileList = (data) => {
-  return request.get("http://" + window.location.host + "/data/index.json");
+  let conversationId;
+  if (data.is_group) {
+    conversationId = data.toContactId;
+  } else {
+    conversationId =
+      data.toContactId > data.currentId
+        ? data.toContactId + "_" + data.currentId
+        : data.currentId + "_" + data.toContactId;
+  }
+  // 仅仅只是为了兼容，这里选择将聊天记录存在前端
+  const messageList = lockr.get(conversationId) || [];
+  messageList.sort((a, b) => a.sendTime - b.sendTime);
+  return Promise.resolve(messageList);
 };
 
 export default imApi;

@@ -51,6 +51,7 @@
 
 <script>
 import { mapState } from "vuex";
+import { Message } from "element-ui";
 
 export default {
   name: "Login",
@@ -108,34 +109,15 @@ export default {
           this.$store
             .dispatch("Login", data)
             .then((res) => {
-              // console.log("reload");
-              window.location.reload();
+              Message.success("登陆成功");
+              this.$router.push({ path: "/" });
             })
-            .catch(() => {
+            .catch((e) => {
               this.loading = false;
+              Message.error(e);
             });
         }
       });
-    },
-    sendCode() {
-      if (!this.loginForm.username) {
-        this.$message.error("请输入账号");
-        return;
-      }
-      this.coding = true;
-      let data = {
-        account: this.loginForm.username,
-        type: 1,
-      };
-      this.$store
-        .dispatch("sendCode", data)
-        .then((res) => {
-          this.$message.success("发送成功");
-          this.coding = false;
-        })
-        .catch(() => {
-          this.coding = false;
-        });
     },
   },
 };

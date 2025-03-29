@@ -8,7 +8,6 @@ const state = {
   userInfo: null, // 用户信息
   // 权限信息
   allAuth: null, // 总权限信息 默认空 调整动态路由
-  socketAction: "",
   contactSync: "",
   toContactId: 0,
   unread: 0,
@@ -79,7 +78,7 @@ const state = {
 const mutations = {
   SET_AUTH: (state, data) => {
     const token = data.token;
-    localStorage.setItem("token", "Bearer " + token);
+    localStorage.setItem("token", token);
   },
   catchSocketAction(state, data) {
     state.socketAction = data;
@@ -105,11 +104,19 @@ const actions = {
   // 登录
   Login({ commit, dispatch }, userInfo) {
     return new Promise((resolve, reject) => {
-      imApi.loginAPI(userInfo).then((res) => {
-        console.log(res);
-        commit("SET_AUTH", res.data);
-        resolve();
-      });
+      imApi
+        .loginAPI(userInfo)
+        .then((res) => {
+          if (res.data) {
+            commit("SET_AUTH", res.data);
+            resolve(res);
+          } else {
+            reject(res);
+          }
+        })
+        .catch((error) => {
+          reject(error);
+        });
     });
   },
 };

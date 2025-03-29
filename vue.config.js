@@ -12,7 +12,8 @@ module.exports = defineConfig({
     proxy: {
       // 配置跨域
       "/api": {
-        target: `http://192.168.153.1:9080`, //请求后台接口
+        // 把地址改成你自己的地址
+        target: `http://62e8d20d.r25.cpolar.top`, //请求后台接口
         changeOrigin: true, // 允许跨域
         pathRewrite: {
           "^/api": "", // 重写请求

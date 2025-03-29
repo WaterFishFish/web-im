@@ -6,10 +6,9 @@ const whiteList = ["/login", "/404"];
 router.beforeEach(async (to, from, next) => {
   const token = getAuth();
   if (token) {
-    const { data } = await imApi.getUserInfoAPI();
-    if (data.info) {
-      console.log(data.info);
-      setUser(data.info);
+    const resp = await imApi.getUserInfoAPI();
+    if (resp.data && resp.data.info) {
+      setUser(resp.data.info);
     }
     if (to.path === "/login") {
       next({ path: "/" });
