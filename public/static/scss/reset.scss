@@ -1,158 +1,160 @@
 
 :root {
-    --el-color-primary: #409eff;
-    --el-color-success: #67c23a;
-    --el-color-warning: #e6a23c;
-    --el-color-danger: #f56c6c;
-    --el-color-info: #909399;
-  }
+  --el-color-primary: #409eff;
+  --el-color-success: #67c23a;
+  --el-color-warning: #e6a23c;
+  --el-color-danger: #f56c6c;
+  --el-color-info: #909399;
+}
 
 * {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
 ul,
 li {
-    list-style: none;
+  list-style: none;
 }
 
 a,
 a:focus,
 a:hover {
-    cursor: pointer;
-    color: inherit;
-    outline: none;
-    text-decoration: none;
+  cursor: pointer;
+  color: inherit;
+  outline: none;
+  text-decoration: none;
 }
 
 body {
-    height: 100%;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-    font-family: Microsoft YaHei, Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Arial, sans-serif;
-    font-size: 14px;
-    color: #252438;
-    visibility: visible;
+  height: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-family: Microsoft YaHei, Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Arial, sans-serif;
+  font-size: 14px;
+  color: #252438;
+  visibility: visible;
 }
 
 html {
-    height: 100%;
-    box-sizing: border-box;
+  height: 100%;
+  box-sizing: border-box;
 }
 
 pre {
-    font-family: Consolas, Menlo, Courier, monospace;
+  font-family: Consolas, Menlo, Courier, monospace;
 }
 
 .fr {
-    float: right;
+  float: right;
 }
 
 .fl {
-    float: left;
+  float: left;
 }
 
 .clear-fix {
-    &:before,
-    &:after {
-        content: '';
-        display: table;
-        clear: both;
-    }
+  &:before,
+  &:after {
+    content: '';
+    display: table;
+    clear: both;
+  }
 }
 
-  // 滚动条美化
-  ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-  }
+// 滚动条美化
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
 
 ::-webkit-scrollbar-track {
-background-color: #eee;
+  background-color: #eee;
 }
 
 ::-webkit-scrollbar-thumb {
-background-color: rgba(185,185,185,0.5);
-border-radius: 10px;
+  background-color: rgba(185, 185, 185, 0.5);
+  border-radius: 10px;
 }
 
 /* Firefox scrollbar */
 .scrollbar-firefox {
-    scrollbar-width: thin;
-    scrollbar-color: #888 #eee;
-  }
+  scrollbar-width: thin;
+  scrollbar-color: #888 #eee;
+}
 
-  .scrollbar-firefox::-webkit-scrollbar {
-    width: initial;
-    height: initial;
-  }
+.scrollbar-firefox::-webkit-scrollbar {
+  width: initial;
+  height: initial;
+}
 
-  .scrollbar-firefox::-webkit-scrollbar-thumb {
-    background-color: #888;
-    border-radius: 10px;
-  }
+.scrollbar-firefox::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 10px;
+}
 
 
 /* el-button禁用相关样式 */
 
 .el-button {
-    &.is-disabled {
-        cursor: default!important;
+  &.is-disabled {
+    cursor: default !important;
+  }
+
+  &.is-disabled {
+    &:focus,
+    &:hover {
+      cursor: default !important;
     }
-    &.is-disabled {
-        &:focus,
-        &:hover {
-            cursor: default!important;
-        }
-    }
+  }
 }
 
 
 /* 子菜单箭头图标样式 */
 
 .el-submenu {
-    >.el-submenu__title {
-        i {
-            font-size: 14px;
-            color: #fff;
-        }
+  > .el-submenu__title {
+    i {
+      font-size: 14px;
+      color: #fff;
     }
+  }
 }
 
 
 /* 卡片样式 */
 
 .el-card {
-    .el-card__header {
-        .title {
-            text-align: center;
-            font-size: 14px;
-            font-weight: bold;
-        }
+  .el-card__header {
+    .title {
+      text-align: center;
+      font-size: 14px;
+      font-weight: bold;
     }
-    .el-card__body {
-        .content-box {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+  }
+
+  .el-card__body {
+    .content-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
+  }
 }
 
 
 /* 穿梭框样式 */
 
 .el-transfer-panel__body {
-    height: 280px;
-    .el-transfer-panel__list {
-        &.is-filterable {
-            height: 230px;
-        }
-    }
-}
+  height: 280px;
 
+  .el-transfer-panel__list {
+    &.is-filterable {
+      height: 230px;
+    }
+  }
+}
 
 
 /*文字单行溢出省略号
@@ -161,9 +163,9 @@ border-radius: 10px;
 */
 
 .text-overflow {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap
 }
 
 
@@ -173,14 +175,14 @@ border-radius: 10px;
 */
 
 .line {
-    font-size: 0px;
-    line-height: 0px;
-    border-top: solid 1px #eee;
-    float: none
+  font-size: 0px;
+  line-height: 0px;
+  border-top: solid 1px #eee;
+  float: none
 }
 
-.cur-handle{
-    cursor: pointer;
+.cur-handle {
+  cursor: pointer;
 }
 
 
@@ -190,167 +192,167 @@ border-radius: 10px;
 	Explain:		.mt表示上边距|.mb表示下边距|.ml表示左边距|.mr表示右边距
 */
 .no-padding {
-    padding: 0px!important
+  padding: 0px !important
 }
 
 .no-margin {
-    margin: 0px!important
+  margin: 0px !important
 }
 
 .m-5 {
-    margin: 5px
+  margin: 5px
 }
 
 .m-10 {
-    margin: 10px
+  margin: 10px
 }
 
 .m-15 {
-    margin: 15px
+  margin: 15px
 }
 
 .m-20 {
-    margin: 20px
+  margin: 20px
 }
 
 .m-25 {
-    margin: 25px
+  margin: 25px
 }
 
 .m-30 {
-    margin: 30px
+  margin: 30px
 }
 
 .m-35 {
-    margin: 35px
+  margin: 35px
 }
 
 .m-40 {
-    margin: 40px
+  margin: 40px
 }
 
 .m-50 {
-    margin: 50px
+  margin: 50px
 }
 
 .mt-5 {
-    margin-top: 5px
+  margin-top: 5px
 }
 
 .mt-10 {
-    margin-top: 10px
+  margin-top: 10px
 }
 
 .mt-15 {
-    margin-top: 15px
+  margin-top: 15px
 }
 
 .mt-20 {
-    margin-top: 20px
+  margin-top: 20px
 }
 
 .mt-25 {
-    margin-top: 25px
+  margin-top: 25px
 }
 
 .mt-30 {
-    margin-top: 30px
+  margin-top: 30px
 }
 
 .mt-35 {
-    margin-top: 35px
+  margin-top: 35px
 }
 
 .mt-40 {
-    margin-top: 40px
+  margin-top: 40px
 }
 
 .mt-50 {
-    margin-top: 50px
+  margin-top: 50px
 }
 
 .mb-5 {
-    margin-bottom: 5px
+  margin-bottom: 5px
 }
 
 .mb-10 {
-    margin-bottom: 10px
+  margin-bottom: 10px
 }
 
 .mb-15 {
-    margin-bottom: 15px
+  margin-bottom: 15px
 }
 
 .mb-20 {
-    margin-bottom: 20px
+  margin-bottom: 20px
 }
 
 .mb-30 {
-    margin-bottom: 30px
+  margin-bottom: 30px
 }
 
 .mb-40 {
-    margin-bottom: 40px
+  margin-bottom: 40px
 }
 
 .mb-50 {
-    margin-bottom: 50px
+  margin-bottom: 50px
 }
 
 .ml-5 {
-    margin-left: 5px
+  margin-left: 5px
 }
 
 .ml-10 {
-    margin-left: 10px
+  margin-left: 10px
 }
 
 .ml-15 {
-    margin-left: 15px
+  margin-left: 15px
 }
 
 .ml-20 {
-    margin-left: 20px
+  margin-left: 20px
 }
 
 .ml-30 {
-    margin-left: 30px
+  margin-left: 30px
 }
 
 .ml-40 {
-    margin-left: 40px
+  margin-left: 40px
 }
 
 .ml-50 {
-    margin-left: 50px
+  margin-left: 50px
 }
 
 .mr-5 {
-    margin-right: 5px
+  margin-right: 5px
 }
 
 .mr-10 {
-    margin-right: 10px
+  margin-right: 10px
 }
 
 .mr-15 {
-    margin-right: 15px
+  margin-right: 15px
 }
 
 .mr-20 {
-    margin-right: 20px
+  margin-right: 20px
 }
 
 .mr-30 {
-    margin-right: 30px
+  margin-right: 30px
 }
 
 .mr-40 {
-    margin-right: 40px
+  margin-right: 40px
 }
 
 .mr-50 {
-    margin-right: 50px
+  margin-right: 50px
 }
 
 
@@ -361,107 +363,107 @@ border-radius: 10px;
 */
 
 .pt-5 {
-    padding-top: 5px
+  padding-top: 5px
 }
 
 .pt-10 {
-    padding-top: 10px
+  padding-top: 10px
 }
 
 .pt-15 {
-    padding-top: 15px
+  padding-top: 15px
 }
 
 .pt-20 {
-    padding-top: 20px
+  padding-top: 20px
 }
 
 .pt-30 {
-    padding-top: 30px
+  padding-top: 30px
 }
 
 .pb-5 {
-    padding-bottom: 5px
+  padding-bottom: 5px
 }
 
 .pb-10 {
-    padding-bottom: 10px
+  padding-bottom: 10px
 }
 
 .pb-15 {
-    padding-bottom: 15px
+  padding-bottom: 15px
 }
 
 .pb-20 {
-    padding-bottom: 20px
+  padding-bottom: 20px
 }
 
 .pb-30 {
-    padding-bottom: 30px
+  padding-bottom: 30px
 }
 
 .pl-5 {
-    padding-left: 5px
+  padding-left: 5px
 }
 
 .pl-10 {
-    padding-left: 10px
+  padding-left: 10px
 }
 
 .pl-15 {
-    padding-left: 15px
+  padding-left: 15px
 }
 
 .pl-20 {
-    padding-left: 20px
+  padding-left: 20px
 }
 
 .pl-30 {
-    padding-left: 30px
+  padding-left: 30px
 }
 
 .pr-5 {
-    padding-right: 5px
+  padding-right: 5px
 }
 
 .pr-10 {
-    padding-right: 10px
+  padding-right: 10px
 }
 
 .pr-15 {
-    padding-right: 15px
+  padding-right: 15px
 }
 
 .pr-20 {
-    padding-right: 20px
+  padding-right: 20px
 }
 
 .pr-30 {
-    padding-right: 30px
+  padding-right: 30px
 }
 
 .pd-5 {
-    padding: 5px
+  padding: 5px
 }
 
 .pd-10 {
-    padding: 10px
+  padding: 10px
 }
 
 .pd-15 {
-    padding: 15px
+  padding: 15px
 }
 
 .pd-20 {
-    padding: 20px
+  padding: 20px
 }
 
 .pd-30 {
-    padding: 30px
+  padding: 30px
 }
 
 .pd-40 {
-    padding: 40px
+  padding: 40px
 }
 
 
@@ -472,44 +474,44 @@ border-radius: 10px;
 */
 
 .radius-4 {
-    border-radius: 4px
+  border-radius: 4px
 }
 
 .radius-6 {
-    border-radius: 6px
+  border-radius: 6px
 }
 
 .radius-8 {
-    border-radius: 8px
+  border-radius: 8px
 }
 
 .radius-10 {
-    border-radius: 10px
+  border-radius: 10px
 }
 
 .radius-12 {
-    border-radius: 12px
+  border-radius: 12px
 }
 
 .radius-14 {
-    border-radius: 14px
+  border-radius: 14px
 }
 
 .radius-16 {
-    border-radius: 16px
+  border-radius: 16px
 }
 
 .radius-18 {
-    border-radius: 18px
+  border-radius: 18px
 }
 
 .radius-20 {
-    border-radius: 20px
+  border-radius: 20px
 }
 
 .radius-round {
-    border-radius: 50%;
-    overflow: hidden
+  border-radius: 50%;
+  overflow: hidden
 }
 
 
@@ -521,13 +523,13 @@ border-radius: 10px;
 */
 
 .box-shadow {
-    -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1)
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1)
 }
 
 .text-shadow {
-    -webkit-text-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
-    text-shadow: 0 0 2px rgba(0, 0, 0, 0.2)
+  -webkit-text-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.2)
 }
 
 
@@ -537,9 +539,9 @@ border-radius: 10px;
 */
 
 .pipe {
-    margin: 0 5px;
-    color: #CCC;
-    font-size: 10px!important
+  margin: 0 5px;
+  color: #CCC;
+  font-size: 10px !important
 }
 
 
@@ -550,55 +552,55 @@ border-radius: 10px;
 */
 
 .f-10 {
-    font-size: 10px
+  font-size: 10px
 }
 
 .f-12 {
-    font-size: 12px
+  font-size: 12px
 }
 
 .f-14 {
-    font-size: 14px
+  font-size: 14px
 }
 
 .f-16 {
-    font-size: 16px
+  font-size: 16px
 }
 
 .f-18 {
-    font-size: 18px
+  font-size: 18px
 }
 
 .f-20 {
-    font-size: 20px
+  font-size: 20px
 }
 
 .f-24 {
-    font-size: 24px
+  font-size: 24px
 }
 
 .f-26 {
-    font-size: 26px
+  font-size: 26px
 }
 
 .f-28 {
-    font-size: 28px
+  font-size: 28px
 }
 
 .f-30 {
-    font-size: 30px
+  font-size: 30px
 }
 
 .f-32 {
-    font-size: 32px
+  font-size: 32px
 }
 
 .f-36 {
-    font-size: 36px
+  font-size: 36px
 }
 
 .f-40 {
-    font-size: 40px
+  font-size: 40px
 }
 
 
@@ -609,59 +611,59 @@ border-radius: 10px;
 */
 
 .lh-16 {
-    line-height: 16px
+  line-height: 16px
 }
 
 .lh-18 {
-    line-height: 18px
+  line-height: 18px
 }
 
 .lh-20 {
-    line-height: 20px
+  line-height: 20px
 }
 
 .lh-22 {
-    line-height: 22px
+  line-height: 22px
 }
 
 .lh-24 {
-    line-height: 24px
+  line-height: 24px
 }
 
 .lh-26 {
-    line-height: 26px
+  line-height: 26px
 }
 
 .lh-28 {
-    line-height: 28px
+  line-height: 28px
 }
 
 .lh-30 {
-    line-height: 30px
+  line-height: 30px
 }
 
 .lh-10x {
-    line-height: 1.0
+  line-height: 1.0
 }
 
 .lh-12x {
-    line-height: 1.2
+  line-height: 1.2
 }
 
 .lh-15x {
-    line-height: 1.5
+  line-height: 1.5
 }
 
 .lh-18x {
-    line-height: 1.8
+  line-height: 1.8
 }
 
 .lh-20x {
-    line-height: 2.0
+  line-height: 2.0
 }
 
 .lh-30x {
-    line-height: 3.0
+  line-height: 3.0
 }
 
 
@@ -677,12 +679,12 @@ border-radius: 10px;
 .c-primary,
 .c-primary a,
 a.c-primary {
-    color: #175CFF
+  color: #175CFF
 }
 
 .c-primary a:hover,
 a.c-primary:hover {
-    color: #175CFF
+  color: #175CFF
 }
 
 
@@ -691,12 +693,12 @@ a.c-primary:hover {
 .c-secondary,
 .c-secondary a,
 a.c-secondary {
-    color: #409EFF
+  color: #409EFF
 }
 
 .c-secondary a:hover,
 a.c-secondary:hover {
-    color: #409EFF
+  color: #409EFF
 }
 
 
@@ -705,12 +707,12 @@ a.c-secondary:hover {
 .c-success,
 .c-success a,
 a.c-success {
-    color: #67C23A
+  color: #67C23A
 }
 
 .c-success a:hover,
 a.c-success:hover {
-    color: #67C23A
+  color: #67C23A
 }
 
 
@@ -719,12 +721,12 @@ a.c-success:hover {
 .c-danger,
 .c-danger a,
 a.c-danger {
-    color: #F56C6C
+  color: #F56C6C
 }
 
 .c-danger a:hover,
 a.c-danger:hover {
-    color: #F56C6C
+  color: #F56C6C
 }
 
 
@@ -733,12 +735,12 @@ a.c-danger:hover {
 .c-warning,
 .c-warning a,
 a.c-warning {
-    color: #FFAA00
+  color: #FFAA00
 }
 
 .c-warning a:hover,
 a.c-warning:hover {
-    color: #FFAA00
+  color: #FFAA00
 }
 
 
@@ -747,12 +749,12 @@ a.c-warning:hover {
 .c-333,
 .c-333 a,
 a.c-333 {
-    color: #252438
+  color: #252438
 }
 
 .c-333 a:hover,
 a.c-333:hover {
-    color: #252438
+  color: #252438
 }
 
 
@@ -761,34 +763,34 @@ a.c-333:hover {
 .c-666,
 .c-666 a,
 a.c-666 {
-    color: #606066
+  color: #606066
 }
 
 .c-666 a:hover,
 a.c-666:hover {
-    color: #606066
+  color: #606066
 }
 
 .c-999,
 .c-999 a,
 a.c-999 {
-    color: #909199
+  color: #909199
 }
 
 .c-999 a:hover,
 a.c-999:hover {
-    color: #909199
+  color: #909199
 }
 
 .c-remark,
 .c-remark a,
 a.c-remark {
-    color: #C0C2CC
+  color: #C0C2CC
 }
 
 .c-remark a:hover,
 a.c-remark:hover {
-    color: #C0C2CC
+  color: #C0C2CC
 }
 
 
@@ -797,12 +799,12 @@ a.c-remark:hover {
 .c-red,
 .c-red a,
 a.c-red {
-    color: red
+  color: red
 }
 
 .c-red a:hover,
 a.c-red:hover {
-    color: red
+  color: red
 }
 
 
@@ -811,12 +813,12 @@ a.c-red:hover {
 .c-green,
 .c-green a,
 a.c-green {
-    color: green
+  color: green
 }
 
 .c-red a:hover,
 a.c-red:hover {
-    color: green
+  color: green
 }
 
 
@@ -825,12 +827,12 @@ a.c-red:hover {
 .c-blue,
 .c-blue a,
 a.c-blue {
-    color: blue
+  color: blue
 }
 
 .c-blue a:hover,
 a.c-blue:hover {
-    color: blue
+  color: blue
 }
 
 
@@ -839,12 +841,12 @@ a.c-blue:hover {
 .c-white,
 .c-white a,
 a.c-white {
-    color: white
+  color: white
 }
 
 .c-white a:hover,
 a.c-white:hover {
-    color: white
+  color: white
 }
 
 
@@ -852,28 +854,32 @@ a.c-white:hover {
 
 .c-black,
 .c-black a {
-    color: black
+  color: black
 }
 
 .c-black a:hover,
 a.c-black:hover {
-    color: black
+  color: black
 }
 
 .fc-danger {
-color: var(--el-color-danger);
+  color: var(--el-color-danger);
 }
+
 .fc-warning {
-color: var(--el-color-warning);
+  color: var(--el-color-warning);
 }
+
 .fc-success {
-color: var(--el-color-success);
+  color: var(--el-color-success);
 }
+
 .fc-info {
-color: var(--el-color-info);
+  color: var(--el-color-info);
 }
+
 .fc-primary {
-color: var(--el-color-primary);
+  color: var(--el-color-primary);
 }
 
 
@@ -882,12 +888,12 @@ color: var(--el-color-primary);
 .c-orange,
 .c-orange a,
 a.c-orange {
-    color: orange
+  color: orange
 }
 
 .c-orange a:hover,
 a.c-orange:hover {
-    color: orange
+  color: orange
 }
 
 
@@ -897,156 +903,156 @@ a.c-orange:hover {
 /* 翠柳 */
 
 .linear-green {
-    background: linear-gradient(45deg, #87DE0E 0%, #64BD38 100%);
+  background: linear-gradient(45deg, #87DE0E 0%, #64BD38 100%);
 }
 
 
 /* 麦黄 */
 
 .linear-yellow {
-    background: linear-gradient(45deg, #FBB437 0%, #FDD36D 100%);
+  background: linear-gradient(45deg, #FBB437 0%, #FDD36D 100%);
 }
 
 
 /* 靛青 */
 
 .linear-blue {
-    background: linear-gradient(45deg, #3485FF 0%, #1C68FF 100%);
+  background: linear-gradient(45deg, #3485FF 0%, #1C68FF 100%);
 }
 
 
 /* 魅红 */
 
 .linear-red {
-    background: linear-gradient(45deg, #F43F3B 0%, #EC008C 100%);
+  background: linear-gradient(45deg, #F43F3B 0%, #EC008C 100%);
 }
 
 
 /* 鎏金 */
 
 .linear-orange {
-    background: linear-gradient(45deg, #Ff9700 0%, #ed1c24 100%);
+  background: linear-gradient(45deg, #Ff9700 0%, #ed1c24 100%);
 }
 
 
 /* 惑紫 */
 
 .linear-purple {
-    background: linear-gradient(45deg, #9000ff 0%, #5e00ff 100%);
+  background: linear-gradient(45deg, #9000ff 0%, #5e00ff 100%);
 }
 
 
 /* 霞彩 */
 
 .linear-pink {
-    background: linear-gradient(45deg, #EC008C 0%, #6739b6 100%);
+  background: linear-gradient(45deg, #EC008C 0%, #6739b6 100%);
 }
 
 
 /* flex布局 */
 
 .lz-flex {
-    display: flex;
+  display: flex;
 }
 
 .lz-border-box {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .lz-rows {
-    flex-direction: row;
+  flex-direction: row;
 }
 
 .im-rows-reverse {
-    flex-direction: row-reverse !important;
+  flex-direction: row-reverse !important;
 }
 
 .lz-columns {
-    flex-direction: column;
+  flex-direction: column;
 }
 
 .lz-columns-reverse {
-    flex-direction: column-reverse !important;
+  flex-direction: column-reverse !important;
 }
 
 .lz-flex-wrap {
-    flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 
 .lz-wrap {
-    flex-direction: row;
-    flex-wrap: wrap;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .lz-nowrap {
-    flex-direction: row;
-    flex-wrap: nowrap;
+  flex-direction: row;
+  flex-wrap: nowrap;
 }
 
 .lz-space-around {
-    justify-content: space-around;
+  justify-content: space-around;
 }
 
 .lz-space-between {
-    justify-content: space-between;
+  justify-content: space-between;
 }
 
 .lz-justify-content-start {
-    justify-content: flex-start;
+  justify-content: flex-start;
 }
 
 .lz-justify-content-center {
-    justify-content: center;
+  justify-content: center;
 }
 
 .lz-justify-content-end {
-    justify-content: flex-end;
+  justify-content: flex-end;
 }
 
 .lz-align-items-start {
-    align-items: flex-start;
+  align-items: flex-start;
 }
 
 .lz-align-items-center {
-    align-items: center;
+  align-items: center;
 }
 
 .lz-align-items-end {
-    align-items: flex-end;
+  align-items: flex-end;
 }
 
 .lz-flex1 {
-    flex: 1;
+  flex: 1;
 }
 
 .rotate45 {
-    transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 
 .rotate90 {
-    transform: rotate(90deg);
+  transform: rotate(90deg);
 }
 
 .rotate135 {
-    transform: rotate(135deg);
+  transform: rotate(135deg);
 }
 
 .rotate180 {
-    transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
 .rotate225 {
-    transform: rotate(225deg);
+  transform: rotate(225deg);
 }
 
 .rotate270 {
-    transform: rotate(270deg);
+  transform: rotate(270deg);
 }
 
 .rotate315 {
-    transform: rotate(315deg);
+  transform: rotate(315deg);
 }
 
 .rotate360 {
-    transform: rotate(360deg);
+  transform: rotate(360deg);
 }

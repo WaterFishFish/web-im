@@ -1,46 +1,36 @@
-import request from '@/utils/request'
+import request from "@/utils/request";
+import lockr from "lockr";
 
-const imApi = {}
+const imApi = {};
 
-imApi.loginAPI= (params) =>{
-	//console.log("请求信息");
-	
-	//console.log(params);
-  //  return request({
-   //     url: 'v1/user/login',
-    //    method: 'post',
-    //   data: params
-   // })
-	return request.get("http://"+window.location.host+"/data/login.json")
+imApi.loginAPI = (userInfo) => {
+  return request.post("/v1/user/login", userInfo);
+};
 
-}
+imApi.getUserInfoAPI = () => {
+  return request.get("/v1/user/user");
+};
 
-imApi.getSystemInfo= (params)  =>{
-	return request.get("http://"+window.location.host+"/data/getSystemInfo.json")
-}
+imApi.getContactsAPI = (data) => {
+  return request.get(
+    "http://" + window.location.host + "/data/getContacts.json"
+  );
+};
 
-
-imApi.getContactsAPI= (data)  =>{
-	return request.get("http://"+window.location.host+"/data/getContacts.json")
-}
-
-
-imApi.getMessageListAPI= (data)  =>{
-	return request.get("http://"+window.location.host+"/data/msg/"+data.toContactId+".json")
-}
-
-
-imApi.groupUserListAPI= (data)  =>{
-	return request.get("http://"+window.location.host+"/data/groupuserlist.json")
-}
-
-
-imApi.getAllUserAPI= (data)  =>{
-	return request.get("http://"+window.location.host+"/data/getAllUser.json")
-}
-
-imApi.getFileList= (data)  =>{
-	return request.get("http://"+window.location.host+"/data/index.json")
-}
+imApi.getMessageListAPI = (data) => {
+  let conversationId;
+  if (data.is_group) {
+    conversationId = data.toContactId;
+  } else {
+    conversationId =
+      data.toContactId > data.currentId
+        ? data.toContactId + "_" + data.currentId
+        : data.currentId + "_" + data.toContactId;
+  }
+  // 仅仅只是为了兼容，这里选择将聊天记录存在前端
+  const messageList = lockr.get(conversationId) || [];
+  messageList.sort((a, b) => a.sendTime - b.sendTime);
+  return Promise.resolve(messageList);
+};
 
 export default imApi;

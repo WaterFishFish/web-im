@@ -13,12 +13,11 @@ import raingadIm from "@/components/index";
 export default {
   name: "app",
   components: {
-    raingadIm
+    raingadIm,
   },
   data() {
     var _this = this;
-
-  }
+  },
 };
 </script>
 
@@ -35,6 +34,7 @@ export default {
   height: 200vh;
   background-size: cover;
 }
+
 .chat-box {
   position: absolute;
   top: 50%;
@@ -42,6 +42,4 @@ export default {
   transform: translate(-50%, -50%);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
 }
-
-
 </style>
